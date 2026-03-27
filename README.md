@@ -306,6 +306,8 @@ Validation errors (400) return a field-to-message map:
 | Password | `1234`                                        |
 | Role     | `ADMIN` (promoted via SQL after registration) |
 
+<img width="2164" height="1952" alt="login" src="https://github.com/user-attachments/assets/37187f34-6866-431c-beeb-44a07f6d6f78" />
+
 **What to verify as admin:**
 
 - Log in → the **Users** tab appears in the navbar
@@ -316,6 +318,7 @@ Validation errors (400) return a field-to-message map:
 - Delete a user who has only `DONE` tasks → should succeed
   
 <img width="995" height="554" alt="Screenshot 2026-03-27 at 10 24 56 AM" src="https://github.com/user-attachments/assets/c1534d59-5e84-462c-b648-9a285f965039" />
+<img width="1109" height="641" alt="Screenshot 2026-03-27 at 1 30 09 PM" src="https://github.com/user-attachments/assets/a825bd77-54d2-4bd9-b1ea-c9cc0949ec46" />
 <img width="985" height="562" alt="Screenshot 2026-03-27 at 10 25 05 AM" src="https://github.com/user-attachments/assets/5b3a9249-b847-4ceb-98b4-6d275682e011" />
 
 ### Regular user account
@@ -337,7 +340,7 @@ Validation errors (400) return a field-to-message map:
 - Delete a task you did not create → Delete button does not appear
 
 <img width="965" height="533" alt="Screenshot 2026-03-27 at 10 24 35 AM" src="https://github.com/user-attachments/assets/0b5ad68e-b8ee-4dc8-9695-fa75fd0412fc" />
-
+<img width="1005" height="647" alt="Screenshot 2026-03-27 at 1 31 06 PM" src="https://github.com/user-attachments/assets/dbdea2a9-ac74-44da-8cbc-f26dab603eff" />
 
 ### How to seed both accounts
 
