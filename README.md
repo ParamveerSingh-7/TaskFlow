@@ -51,11 +51,11 @@ This is intentional. There is no public-facing endpoint to create or promote an 
 | Action                          | Allowed? | Notes                                                             |
 | ------------------------------- | -------- | ----------------------------------------------------------------- |
 | View all registered users       | Yes      | Users management page at `/admin/users`                           |
-| Delete a user                   | Yes      | **Blocked** if user has tasks with status `TODO` or `IN_PROGRESS` |
+| Delete a user                   | Yes      | **Blocked** if user has tasks in the dashboard                    |
 | Create a task                   | Yes      | Can assign to themselves or any other user                        |
 | Assign a task to any user       | Yes      | Cross-user assignment is admin-only                               |
 | View all tasks on dashboard     | Yes      | Full visibility across all users                                  |
-| Filter tasks by assigned user   | Yes      | User filter dropdown visible to admins only                       |
+| Filter tasks by assigned user   | Yes      | User filter dropdown visible to both admins and users             |
 | Edit a task they created        | Yes      | Can update title, description, status                             |
 | Change status of their own task | Yes      | Full status control over tasks they created                       |
 | Delete a task they created      | Yes      | Only for tasks where they are `createdBy`                         |
@@ -63,8 +63,8 @@ This is intentional. There is no public-facing endpoint to create or promote an 
 
 #### User deletion rule
 
-> **An admin cannot delete a user who has tasks assigned to them with status `TODO` or `IN_PROGRESS`.**
-> All assigned tasks must be `DONE` (or reassigned) before the user account can be removed.
+> **An admin cannot delete a user who has tasks assigned to them on the dashboard.**
+> All assigned tasks must be deleted before the user account can be removed.
 > This prevents orphaned in-progress work when a user is removed from the system.
 
 ---
@@ -191,7 +191,7 @@ POST http://localhost:8080/api/auth/register
 {
   "name": "Admin",
   "email": "admin@taskflow.com",
-  "password": "Admin@1234"
+  "password": "1234"
 }
 ```
 
@@ -290,7 +290,7 @@ Validation errors (400) return a field-to-message map:
 ```json
 {
   "email": "Must be a valid email",
-  "password": "Password must be at least 6 characters"
+  "password": "Password must be at least 4 characters"
 }
 ```
 
@@ -303,7 +303,7 @@ Validation errors (400) return a field-to-message map:
 | Field    | Value                                         |
 | -------- | --------------------------------------------- |
 | Email    | `admin@taskflow.com`                          |
-| Password | `Admin@1234`                                  |
+| Password | `1234`                                        |
 | Role     | `ADMIN` (promoted via SQL after registration) |
 
 **What to verify as admin:**
@@ -314,13 +314,16 @@ Validation errors (400) return a field-to-message map:
 - Create a task → assign it to a regular user → verify they can edit it
 - Try deleting a user who has active tasks → should be blocked
 - Delete a user who has only `DONE` tasks → should succeed
+  
+<img width="995" height="554" alt="Screenshot 2026-03-27 at 10 24 56 AM" src="https://github.com/user-attachments/assets/c1534d59-5e84-462c-b648-9a285f965039" />
+<img width="985" height="562" alt="Screenshot 2026-03-27 at 10 25 05 AM" src="https://github.com/user-attachments/assets/5b3a9249-b847-4ceb-98b4-6d275682e011" />
 
 ### Regular user account
 
 | Field    | Value                              |
 | -------- | ---------------------------------- |
 | Email    | `user@taskflow.com`                |
-| Password | `User@1234`                        |
+| Password | `1234`                             |
 | Role     | `USER` (automatic on registration) |
 
 **What to verify as user:**
@@ -332,6 +335,9 @@ Validation errors (400) return a field-to-message map:
 - Edit a task created by someone else → Edit button does not appear
 - Delete a task you created → succeeds
 - Delete a task you did not create → Delete button does not appear
+
+<img width="965" height="533" alt="Screenshot 2026-03-27 at 10 24 35 AM" src="https://github.com/user-attachments/assets/0b5ad68e-b8ee-4dc8-9695-fa75fd0412fc" />
+
 
 ### How to seed both accounts
 
