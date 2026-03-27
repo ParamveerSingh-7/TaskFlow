@@ -206,8 +206,8 @@ UPDATE users SET role = 'ADMIN' WHERE email = 'admin@taskflow.com';
 ### Step 1 — Create `.env` at the project root
 
 ```env
-MYSQL_ROOT_PASSWORD=TaskFlow2026!
-JWT_SECRET=taskflowsupersecretjwtkey2026abcdefghij
+MYSQL_ROOT_PASSWORD=placeholder_password
+JWT_SECRET=placeholder_key
 ```
 
 ### Step 2 — Build the backend JAR
@@ -377,4 +377,4 @@ UPDATE users SET role = 'ADMIN' WHERE email = 'admin@taskflow.com';
 
 ---
 
-_TaskFlow — Capstone Project · March 2026_
+_TaskFlow — Capstone Project_
